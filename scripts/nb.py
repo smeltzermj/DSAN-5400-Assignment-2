@@ -39,7 +39,7 @@ def build_dataframe(folder):
                 #  contains the text from the opened file. Note that you want
                 #  a single DataFrame, but you loop over numerous files.
                 if dir_name in ("kennedy", "johnson"):
-                    ...
+                    training_df <- pd.DataFrame(data = text, columns = dir_name)
                 else:
                     # TODO Otherwise, we want to create a DataFrame for the
                     #  unlabeled data in a similar fashion. But this is a
