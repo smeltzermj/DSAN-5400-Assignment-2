@@ -19,8 +19,8 @@ def build_dataframe(folder):
     :return: a tuple of pandas DataFrames
     """
     path = Path(folder)
-    df_train = pd.DataFrame(columns=["author"])
-    df_test = pd.DataFrame(columns=["author"])
+    df_train = pd.DataFrame(columns=["author", "text"])
+    df_test = pd.DataFrame(columns=["author", "text"])
     author_to_id_map = {"kennedy": 0, "johnson": 1}
 
     def make_df_from_dir(dir_name, df):
@@ -39,7 +39,7 @@ def build_dataframe(folder):
                 #  contains the text from the opened file. Note that you want
                 #  a single DataFrame, but you loop over numerous files.
                 if dir_name in ("kennedy", "johnson"):
-                    training_df <- pd.DataFrame(data = text, columns = dir_name)
+                    
                 else:
                     # TODO Otherwise, we want to create a DataFrame for the
                     #  unlabeled data in a similar fashion. But this is a
@@ -47,7 +47,7 @@ def build_dataframe(folder):
                     #  the directory but instead from the file name. Again,
                     #  the field "author" should have the author's name and
                     #  the field "text" should contain the text.
-                    ...
+                    testing_df <- pd.DataFrame(data=text)
         return df
 
     for p in path.iterdir():
