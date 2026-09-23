@@ -105,8 +105,8 @@ def train_nb(df, alpha=0.1):
     # TODO Create a matrix containing all 0s called training_matrix of size
     #  (n_docs, len(vocabulary)), then fill it with the counts of each word
     #  for each document. This is the bag-of-words matrix for all the documents
-    
-    training_matrix = np.zeroes((n_docs, len(vocabulary)))
+
+    training_matrix = np.zeros((n_docs, len(vocabulary)))
 
     for doc_index, text in enumerate(df["text"]):
         words = text.lower().split()
@@ -115,14 +115,32 @@ def train_nb(df, alpha=0.1):
             word_index = vocabulary[word]
             training_matrix[doc_index, word_index] += 1
 
+    #print(training_matrix.shape)
+    #print(training_matrix[0].sum())
     
     # TODO Get word counts for both classes
-    word_counts_per_class = ...
+    word_counts_per_class = np.zeros((n_classes, len(vocabulary)))
+
+    for c in range(n_classes):
+        word_counts_per_class[c] = training_matrix[df["author"] == c].sum(axis=0)
+
+    #print(word_counts_per_class.shape)
+    #print(word_counts_per_class[0].sum())
+    #print(word_counts_per_class[1].sum())
+
     # TODO Initialize a matrix to store the likelihoods
-    likelihoods = ...
+    likelihoods = np.zeros((n_classes, len(vocabulary)))
 
     # TODO Then fill it in using Lidstone smoothing
-    ...
+
+    for c in range(n_classes):
+        likelihoods[c] = (word_counts_per_class[c] + alpha) / (word_counts_per_class[c].sum() + alpha * len(vocabulary))
+
+    #print(likelihoods.shape)
+    #print(likelihoods[0].sum())
+    #print(likelihoods[1].sum())
+
+
     return vocabulary, priors, likelihoods
 
 
