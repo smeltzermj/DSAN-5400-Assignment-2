@@ -188,19 +188,19 @@ def sklearn_nb(training_df, test_df):
     vectorizer = CountVectorizer()
 
     # TODO Fit the vectorizer on the training set text
-    vectorizer.fit(...)
+    vectorizer.fit(training_df["text"])
 
     # TODO Then transform the text using the vectorizer
-    training_data = vectorizer.transform(...)
+    training_data = vectorizer.transform(training_df["text"])
     training_data.toarray()
 
     # Do the same for the test data
-    test_data = vectorizer.transform(...)
+    test_data = vectorizer.transform(test_df["text"])
     test_data.toarray()
 
     nb_classifier = MultinomialNB()
     # TODO Fit the Naive Bayes classifier
-    nb_classifier.fit(...)
+    nb_classifier.fit(training_data, training_df["author"])
 
     pred_nb = nb_classifier.predict(test_data)
     return pred_nb
@@ -245,11 +245,12 @@ if __name__ == "__main__":
     training_df, test_df = build_dataframe(args.indir)
     vocabulary, priors, likelihoods = train_nb(training_df)
     class_predictions = test(test_df, vocabulary, priors, likelihoods)
-    print(test_df["author"].tolist())
-    print(class_predictions)
+    #print(test_df["author"].tolist())
+    #print(class_predictions)
     #acc, f1, conf = get_metrics(test_df, class_predictions)
     #plot_confusion_matrix(conf, [0, 1])
-    #sklearn_preds = sklearn_nb(training_df, test_df)
+    sklearn_preds = sklearn_nb(training_df, test_df)
+    print(sklearn_preds)
     #sklearn_metrics = get_metrics(test_df, sklearn_preds)
 
     # EDA for Problem 1C
