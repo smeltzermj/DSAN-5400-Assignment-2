@@ -182,9 +182,18 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     training_df, test_df = build_dataframe(args.indir)
-    vocabulary, priors, likelihoods = train_nb(training_df)
-    class_predictions = test(test_df, vocabulary, priors, likelihoods)
-    acc, f1, conf = get_metrics(test_df, class_predictions)
-    plot_confusion_matrix(conf, [0, 1])
-    sklearn_preds = sklearn_nb(training_df, test_df)
-    sklearn_metrics = get_metrics(test_df, sklearn_preds)
+    print(training_df.head())
+    print(training_df.shape)
+
+    print(test_df.head())
+    print(test_df.shape)
+    #vocabulary, priors, likelihoods = train_nb(training_df)
+    #class_predictions = test(test_df, vocabulary, priors, likelihoods)
+    #acc, f1, conf = get_metrics(test_df, class_predictions)
+    #plot_confusion_matrix(conf, [0, 1])
+    #sklearn_preds = sklearn_nb(training_df, test_df)
+    #sklearn_metrics = get_metrics(test_df, sklearn_preds)
+
+
+
+
