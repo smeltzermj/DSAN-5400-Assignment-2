@@ -65,7 +65,7 @@ def build_dataframe(folder):
     return df_train, df_test
 
 
-def train_nb(df, alpha=0.1):
+def train_nb(df, alpha=0.01):
     """
     Takes as input a pandas DataFrame containing Federalist
     files text to determine priors and likelihoods
@@ -326,4 +326,9 @@ if __name__ == "__main__":
     #    print("Start: ", words[:15])
     #    print("End: ", words[-15:])
 
+    for alpha in [0.01, 0.1, 1.0, 10.0]:
+        vocabulary, priors, likelihoods = train_nb(training_df, alpha=alpha)
+        class_predictions = test(test_df, vocabulary, priors, likelihoods)
+        acc, f1, conf = get_metrics(test_df["author"], class_predictions)
+        print(alpha, acc, class_predictions)
 

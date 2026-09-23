@@ -32,15 +32,23 @@ I completed a simple examination of a sample of the speeches and did not find a 
 
 ### Part E
 
-**What are your two prior probability estimates?**
+**What are your two prior probability estimates?**\
+
+The estimated prior probabilities were approximately 0.353 for Kennedy and 0.647 for Johnson.
 
 **What is the shape of the matrix storing your likelihoods?**
 
+he likelihood matrix had shape \((2, 22961)\), corresponding to two authors and 22,961 vocabulary terms.
+
 **What happens when you vary the smoothing hyperparameter** $\alpha$ (alpha)?
+
+Increasing the Lidstone smoothing parameter (alpha) reduced accuracy in this test set. Accuracy remained at 0.80 for \(\alpha=0.01\) and \(\alpha=0.1\), declined to 0.70 at \(\alpha=1.0\), and fell to 0.50 at \(\alpha=10.0\), suggesting that excessive smoothing weakened the differences in word likelihoods between the two authors. 
 
 ### Part F
 
 **What are the predicted authors for each of the unlabeled works?**
+
+
 
 # Problem 2
 
@@ -54,8 +62,8 @@ I completed a simple examination of a sample of the speeches and did not find a 
 
 | ---                     | Accuracy      | F1-Score      |
 |-------------------------|---------------|---------------|
-| Naive Bayes Classifier  | Row 1, Cell 1 | Row 1, Cell 2 |
-| Scikit-learn Classifier | Row 2, Cell 1 | Row 2, Cell 2 |
+| Naive Bayes Classifier  | 0.80 | .75 |
+| Scikit-learn Classifier | .90 | .8889 |
 
 ### Part B
 
