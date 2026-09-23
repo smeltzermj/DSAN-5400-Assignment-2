@@ -39,7 +39,7 @@ def build_dataframe(folder):
                 #  contains the text from the opened file. Note that you want
                 #  a single DataFrame, but you loop over numerous files.
                 if dir_name in ("kennedy", "johnson"):
-                    
+                    df.loc[len(df)] = [dir_name, text]
                 else:
                     # TODO Otherwise, we want to create a DataFrame for the
                     #  unlabeled data in a similar fashion. But this is a
@@ -47,7 +47,10 @@ def build_dataframe(folder):
                     #  the directory but instead from the file name. Again,
                     #  the field "author" should have the author's name and
                     #  the field "text" should contain the text.
-                    testing_df <- pd.DataFrame(data=text)
+                    author = f.stem.split("_")[-1] 
+                    df.loc[len(df)] = [author, text]
+                    # In order to get the author name from the file, I had to take the name of the file, split it (with _ as the delimiter)
+                    # And then take the last indexed value (i.e., the name). Tough!
         return df
 
     for p in path.iterdir():
