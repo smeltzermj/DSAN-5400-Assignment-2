@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+from collections import Counter
 from pathlib import Path
 from sklearn import metrics
 from sklearn.naive_bayes import MultinomialNB
@@ -182,11 +182,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     training_df, test_df = build_dataframe(args.indir)
-    print(training_df.head())
-    print(training_df.shape)
-
-    print(test_df.head())
-    print(test_df.shape)
     #vocabulary, priors, likelihoods = train_nb(training_df)
     #class_predictions = test(test_df, vocabulary, priors, likelihoods)
     #acc, f1, conf = get_metrics(test_df, class_predictions)
@@ -194,6 +189,20 @@ if __name__ == "__main__":
     #sklearn_preds = sklearn_nb(training_df, test_df)
     #sklearn_metrics = get_metrics(test_df, sklearn_preds)
 
+    # EDA for Problem 1C
+    def count_words(text):
+        return len(text.split())
 
+    word_counts = []
+
+    for text in training_df["text"]:
+        word_counts.append(count_words(text))
+
+    training_df["word_count"] = word_counts
+
+    print(training_df.head())
+
+    print(training_df.groupby("author")["word_count"].mean())
+    print(training_df.groupby("author")["word_count"].median())
 
 

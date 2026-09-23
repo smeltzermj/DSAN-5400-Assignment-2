@@ -20,7 +20,11 @@ Thus, you'd be more likely to guess Johnson authored an unlabeled paper.
 
 **Does one author's documents tend to be shorter?**
 
+Kennedy's speeches tend to be shorter in this collection. Kennedy's speeches have mean and median lengths of 2879 and 2291, respectively, while Johnson's are 3620 and 3848. Both mean and median suggest Johnson was a fair bit more long-winded than Kennedy. 
+
 **What are the most common words used by each author?**
+
+
 
 **Do either authors tend to start or end their works in a consistent way?**
 
