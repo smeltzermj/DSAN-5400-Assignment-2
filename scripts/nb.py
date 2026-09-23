@@ -105,10 +105,17 @@ def train_nb(df, alpha=0.1):
     # TODO Create a matrix containing all 0s called training_matrix of size
     #  (n_docs, len(vocabulary)), then fill it with the counts of each word
     #  for each document. This is the bag-of-words matrix for all the documents
+    
     training_matrix = np.zeroes((n_docs, len(vocabulary)))
 
+    for doc_index, text in enumerate(df["text"]):
+        words = text.lower().split()
 
-    ...
+        for word in words:
+            word_index = vocabulary[word]
+            training_matrix[doc_index, word_index] += 1
+
+    
     # TODO Get word counts for both classes
     word_counts_per_class = ...
     # TODO Initialize a matrix to store the likelihoods
