@@ -175,7 +175,6 @@ def test(df, vocabulary, priors, likelihoods):
         # TODO Then get your predictions, yhat
         yhat = np.argmax(preds)
         class_predictions.append(yhat)
-    print(class_predictions)
     return class_predictions
 
 
@@ -244,9 +243,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     training_df, test_df = build_dataframe(args.indir)
-    train_nb(training_df)
-    #vocabulary, priors, likelihoods = train_nb(training_df)
-    #class_predictions = test(test_df, vocabulary, priors, likelihoods)
+    vocabulary, priors, likelihoods = train_nb(training_df)
+    class_predictions = test(test_df, vocabulary, priors, likelihoods)
+    print(test_df["author"].tolist())
+    print(class_predictions)
     #acc, f1, conf = get_metrics(test_df, class_predictions)
     #plot_confusion_matrix(conf, [0, 1])
     #sklearn_preds = sklearn_nb(training_df, test_df)
