@@ -4,7 +4,7 @@
 
 **If you only had access to the prior probabilities, would you be more likely to guess that Kennedy or Johnson authored an unlabeled paper? Why?**
 
-The prior probability is how likely an event or parameter is before collecting any other data. In this case, the prior probabilities would be $P(K)$, i.e., the probability that a paper in the training set is Kennedy authored, and $P(J)$, the probability that a paper in the training set is Johnson authored. Given that there are 36 Kennedy-authored papers and 66-Johnson authored papers, totaling 102 papers, the priors are:
+The prior probability is how likely an event or parameter is before collecting any other data. In this case, the prior probabilities would be $P(K)$, i.e., the probability that a paper in the training set is Kennedy authored, and $P(J)$, the probability that a paper in the training set is Johnson authored. Given that there are 36 Kennedy-authored papers and 66 Johnson-authored papers, totaling 102 papers, the priors are:
 
 $$
 P(\text{Kennedy}) = \frac{36}{36+66} = \frac{36}{102} \approx 0.353
@@ -38,9 +38,9 @@ The estimated prior probabilities were approximately 0.353 for Kennedy and 0.647
 
 **What is the shape of the matrix storing your likelihoods?**
 
-he likelihood matrix had shape \((2, 22961)\), corresponding to two authors and 22,961 vocabulary terms.
+The likelihood matrix had shape \((2, 22961)\), corresponding to two authors and 22,961 vocabulary terms.
 
-**What happens when you vary the smoothing hyperparameter** $\alpha$ (alpha)?
+**What happens when you the smoothing hyperparameter** $\alpha$ (alpha)?
 
 Increasing the Lidstone smoothing parameter (alpha) reduced accuracy in this test set. Accuracy remained at 0.80 for \(\alpha=0.01\) and \(\alpha=0.1\), declined to 0.70 at \(\alpha=1.0\), and fell to 0.50 at \(\alpha=10.0\), suggesting that excessive smoothing weakened the differences in word likelihoods between the two authors. 
 
@@ -66,7 +66,7 @@ speech_13_kennedy.txt -> Kennedy
 
 **How do your predictions from your hand-built Naive Bayes classifier compare with the scikit-learn implementation?**
 
-The predictions from my hard-coded Naive Bayes classifier were quite similar to those from the one in which I used the scikit-learn code. The two classifiers agreed on 9 of the 10 test speeches. They differed only on speech_8_johnson.txt, which my classifier predicted as Kennedy while scikit-learn correctly predicted as Johnson.
+The predictions from my hand-built Naive Bayes classifier were quite similar to those from the one in which I used the scikit-learn code. The two classifiers agreed on 9 of the 10 test speeches. They differed only on speech_8_johnson.txt, which my classifier predicted as Kennedy while scikit-learn correctly predicted as Johnson.
 
 # Problem 3
 
@@ -81,4 +81,4 @@ The predictions from my hard-coded Naive Bayes classifier were quite similar to 
 
 **For each classifier, what do you notice from the confusion matrix?**
 
-Both classifiers were able to correctly identify all five Kennedy speeches. The difference was in the Johnson speeches. My hard-coded NB classifier misclassified two Johnson speeches as Kennedy, while the sciki learn classifier misclassified only one Johnson speech as Kennedy. Neither classifier misclassified a Kennedy speech as Johnson, which seems to suggests that both models were better at identifying Kennedy than Johnson in this test set, with the scikit-learn implementation performing somewhat better overall. Not sure why! Maybe a smaller alpha? Or a different smoothing altogether?
+Both classifiers were able to correctly identify all five Kennedy speeches. The difference was in the Johnson speeches. My hand-built NB classifier misclassified two Johnson speeches as Kennedy, while the sciki learn classifier misclassified only one Johnson speech as Kennedy. Neither classifier misclassified a Kennedy speech as Johnson, which suggests that both models were better at identifying Kennedy than Johnson in this test set, with the scikit-learn implementation performing somewhat better overall. Perhaps that's due to different tokenization?

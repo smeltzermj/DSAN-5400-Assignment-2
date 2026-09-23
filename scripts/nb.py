@@ -65,7 +65,7 @@ def build_dataframe(folder):
     return df_train, df_test
 
 
-def train_nb(df, alpha=0.01):
+def train_nb(df, alpha=0.1):
     """
     Takes as input a pandas DataFrame containing Federalist
     files text to determine priors and likelihoods
@@ -228,13 +228,14 @@ def plot_confusion_matrix(conf_matrix_data, labels, filename):
     :param conf_matrix_data:
     :return: None
     """
+    plt.figure()
     plt.title("Confusion matrix")
     axis = sns.heatmap(conf_matrix_data, annot=True)
     axis.set_xticklabels(labels)
     axis.set_yticklabels(labels)
     axis.set(xlabel="Predicted", ylabel="True")
     plt.savefig(filename)
-    plt.show()
+    plt.close()
     return
 
 
