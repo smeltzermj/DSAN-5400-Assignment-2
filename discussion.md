@@ -24,7 +24,7 @@ Kennedy's speeches tend to be shorter in this collection. Kennedy's speeches hav
 
 **What are the most common words used by each author?**
 
-
+The 20 most common words for both authors are dominated by stop words such as “the,” “of,” “and,” and “to.” One noticeable difference is the relative frequency of first-person language. Johnson uses “I” at roughly twice the rate of Kennedy (1.72% versus 0.85%), while Kennedy uses the first-person plural possessive “our” somewhat more frequently than Johnson (1.48% versus 1.02%).
 
 **Do either authors tend to start or end their works in a consistent way?**
 

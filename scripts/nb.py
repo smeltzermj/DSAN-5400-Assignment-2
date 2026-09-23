@@ -205,4 +205,34 @@ if __name__ == "__main__":
     print(training_df.groupby("author")["word_count"].mean())
     print(training_df.groupby("author")["word_count"].median())
 
+    kennedy_texts = training_df[training_df["author"] == 0]["text"]
+    kennedy_words = []
 
+    for text in kennedy_texts:
+        words = text.lower().split()
+        kennedy_words.extend(words)
+
+    kennedy_counts = Counter(kennedy_words)
+    print(kennedy_counts.most_common(20))
+
+    johnson_texts = training_df[training_df["author"] == 1]["text"]
+    johnson_words = []
+
+    for text in johnson_texts:
+        words = text.lower().split()
+        johnson_words.extend(words)
+
+    johnson_counts = Counter(johnson_words)
+    print(johnson_counts.most_common(20))
+
+    print(kennedy_counts["i"] / len(kennedy_words))
+    print(johnson_counts["i"] / len(johnson_words))
+
+    print(kennedy_counts["we"] / len(kennedy_words))
+    print(johnson_counts["we"] / len(johnson_words))
+
+    print(kennedy_counts["my"] / len(kennedy_words))
+    print(johnson_counts["my"] / len(johnson_words))
+
+    print(kennedy_counts["our"] / len(kennedy_words))
+    print(johnson_counts["our"] / len(johnson_words))
