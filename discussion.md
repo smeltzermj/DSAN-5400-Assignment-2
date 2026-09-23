@@ -28,6 +28,8 @@ The 20 most common words for both authors are dominated by stop words such as â€
 
 **Do either authors tend to start or end their works in a consistent way?**
 
+I completed a simple examination of a sample of the speeches and did not find a strong or consistent pattern in how either Kennedy or Johnson began or ended their speeches. For both men, speeches often began with formal references to the audience, while the endings varied considerably, with some concluding in expressions of thanks. This surface-level analysis did not reveal any especially distinctive patterns, though more systematic methods might identify patterns that are not obvious from manual inspection.
+
 ### Part E
 
 **What are your two prior probability estimates?**

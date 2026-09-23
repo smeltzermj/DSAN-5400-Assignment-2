@@ -76,15 +76,38 @@ def train_nb(df, alpha=0.1):
     #  file to a unique index. Also, create variables for the number of
     #  documents and the number of classes. Use df.shape for the vocabulary
     #  and the nunique() method for the number of classes
-    vocabulary = ...
-    n_docs = ...
-    n_classes = ...
+    vocabulary = {}
+    word_index = 0
+
+    for text in df["text"]:
+        words = text.lower().split()
+
+        for word in words:
+            if word not in vocabulary:
+                vocabulary[word] = word_index
+                word_index += 1
+
+    n_docs = df.shape[0]
+    n_classes = df["author"].nunique()
+
+    #print(len(vocabulary))
+    #print(n_docs)
+    #print(n_classes)
+
+
     # TODO Compute the priors
-    priors = ...
+    priors = np.zeros(n_classes)
+
+    for c in range(n_classes):
+        priors[c] = df[df["author"] == c].shape[0] / n_docs
+        
+
     # TODO Create a matrix containing all 0s called training_matrix of size
     #  (n_docs, len(vocabulary)), then fill it with the counts of each word
     #  for each document. This is the bag-of-words matrix for all the documents
-    training_matrix = ...
+    training_matrix = np.zeroes((n_docs, len(vocabulary)))
+
+
     ...
     # TODO Get word counts for both classes
     word_counts_per_class = ...
@@ -94,6 +117,8 @@ def train_nb(df, alpha=0.1):
     # TODO Then fill it in using Lidstone smoothing
     ...
     return vocabulary, priors, likelihoods
+
+
 
 
 def test(df, vocabulary, priors, likelihoods):
@@ -182,6 +207,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     training_df, test_df = build_dataframe(args.indir)
+    train_nb(training_df)
     #vocabulary, priors, likelihoods = train_nb(training_df)
     #class_predictions = test(test_df, vocabulary, priors, likelihoods)
     #acc, f1, conf = get_metrics(test_df, class_predictions)
@@ -190,53 +216,53 @@ if __name__ == "__main__":
     #sklearn_metrics = get_metrics(test_df, sklearn_preds)
 
     # EDA for Problem 1C
-    def count_words(text):
-        return len(text.split())
-
-    word_counts = []
-
-    for text in training_df["text"]:
-        word_counts.append(count_words(text))
-
-    training_df["word_count"] = word_counts
-
-    print(training_df.head())
-
-    print(training_df.groupby("author")["word_count"].mean())
-    print(training_df.groupby("author")["word_count"].median())
-
-    kennedy_texts = training_df[training_df["author"] == 0]["text"]
-    kennedy_words = []
-
-    for text in kennedy_texts:
-        words = text.lower().split()
-        kennedy_words.extend(words)
-
-    kennedy_counts = Counter(kennedy_words)
-    print(kennedy_counts.most_common(20))
-
-    johnson_texts = training_df[training_df["author"] == 1]["text"]
-    johnson_words = []
-
-    for text in johnson_texts:
-        words = text.lower().split()
-        johnson_words.extend(words)
-
-    johnson_counts = Counter(johnson_words)
-    print(johnson_counts.most_common(20))
-
-    print(kennedy_counts["i"] / len(kennedy_words))
-    print(johnson_counts["i"] / len(johnson_words))
-
-    print(kennedy_counts["we"] / len(kennedy_words))
-    print(johnson_counts["we"] / len(johnson_words))
-
-    print(kennedy_counts["my"] / len(kennedy_words))
-    print(johnson_counts["my"] / len(johnson_words))
-
-    print(kennedy_counts["our"] / len(kennedy_words))
-    print(johnson_counts["our"] / len(johnson_words))
-
+    #def count_words(text):
+    #    return len(text.split())
+#
+    #word_counts = []
+#
+    #for text in training_df["text"]:
+    #    word_counts.append(count_words(text))
+#
+    #training_df["word_count"] = word_counts
+#
+    #print(training_df.head())
+#
+    #print(training_df.groupby("author")["word_count"].mean())
+    #print(training_df.groupby("author")["word_count"].median())
+#
+    #kennedy_texts = training_df[training_df["author"] == 0]["text"]
+    #kennedy_words = []
+#
+    #for text in kennedy_texts:
+    #    words = text.lower().split()
+    #    kennedy_words.extend(words)
+#
+    #kennedy_counts = Counter(kennedy_words)
+    #print(kennedy_counts.most_common(20))
+#
+    #johnson_texts = training_df[training_df["author"] == 1]["text"]
+    #johnson_words = []
+#
+    #for text in johnson_texts:
+    #    words = text.lower().split()
+    #    johnson_words.extend(words)
+#
+    #johnson_counts = Counter(johnson_words)
+    #print(johnson_counts.most_common(20))
+#
+    #print(kennedy_counts["i"] / len(kennedy_words))
+    #print(johnson_counts["i"] / len(johnson_words))
+#
+    #print(kennedy_counts["we"] / len(kennedy_words))
+    #print(johnson_counts["we"] / len(johnson_words))
+#
+    #print(kennedy_counts["my"] / len(kennedy_words))
+    #print(johnson_counts["my"] / len(johnson_words))
+#
+    #print(kennedy_counts["our"] / len(kennedy_words))
+    #print(johnson_counts["our"] / len(johnson_words))
+#
     #kennedy_first_words = kennedy_words[:15]
     #kennedy_last_words = kennedy_words[-15:]
     #johnson_first_words = johnson_words[:15]
@@ -248,12 +274,14 @@ if __name__ == "__main__":
     #print(johnson_last_words)
     # Turns out this wasn't the best method. Let's try iterating over a few speeches, instead.
 
-    for text in kennedy_texts.head(5):
-        words = text.lower().split()
-        print("Start: ", words[:15])
-        print("End: ", words[-15:])
+    #for text in kennedy_texts.head(5):
+    #    words = text.lower().split()
+    #    print("Start: ", words[:15])
+    #    print("End: ", words[-15:])
+#
+    #for text in johnson_texts.head(5):
+    #    words = text.lower().split()
+    #    print("Start: ", words[:15])
+    #    print("End: ", words[-15:])
 
-    for text in johnson_texts.head(5):
-        words = text.lower().split()
-        print("Start: ", words[:15])
-        print("End: ", words[-15:])
+
