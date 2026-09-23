@@ -221,7 +221,7 @@ def get_metrics(true, preds):
     return accuracy, f1_score, conf_matrix
 
 
-def plot_confusion_matrix(conf_matrix_data, labels):
+def plot_confusion_matrix(conf_matrix_data, labels, filename):
     """
     Takes as input confusion matrix data from get_metrics() and prints out a
     confusion matrix
@@ -233,7 +233,7 @@ def plot_confusion_matrix(conf_matrix_data, labels):
     axis.set_xticklabels(labels)
     axis.set_yticklabels(labels)
     axis.set(xlabel="Predicted", ylabel="True")
-    plt.savefig("conf.jpg")
+    plt.savefig(filename)
     plt.show()
     return
 
@@ -247,10 +247,12 @@ if __name__ == "__main__":
     vocabulary, priors, likelihoods = train_nb(training_df)
     class_predictions = test(test_df, vocabulary, priors, likelihoods)
     acc, f1, conf = get_metrics(test_df["author"], class_predictions)
-    plot_confusion_matrix(conf, ["Kennedy", "Johnson"])
     sklearn_preds = sklearn_nb(training_df, test_df)
     sklearn_acc, sklearn_f1, sklearn_conf = get_metrics(
         test_df["author"], sklearn_preds)
+    plot_confusion_matrix(conf, ["Kennedy", "Johnson"], "conf_custom.jpg")
+    plot_confusion_matrix(sklearn_conf, ["Kennedy", "Johnson"], "conf_sklearn.jpg")
+
 
 
 
