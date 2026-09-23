@@ -157,13 +157,25 @@ def test(df, vocabulary, priors, likelihoods):
     for text in df["text"]:
         test_vector = np.zeros(shape=(len(vocabulary)))
         # TODO Fill test_vector with counts for the words that appear in the
-        #  vocabulary
-        ...
+        #  vocabulary    
+        words = text.lower().split() # tokenizing the speech
+
+        for word in words:
+            if word in vocabulary:
+                word_index = vocabulary[word]
+                test_vector[word_index] += 1
+
         # TODO Compute predictions p(y|text)
-        preds = ...
+        preds = np.zeros(len(priors))
+
+        for c in range(len(priors)):
+            preds[c] = np.log(priors[c]) + np.sum(test_vector*np.log(likelihoods[c]))
+
+
         # TODO Then get your predictions, yhat
-        yhat = ...
+        yhat = np.argmax(preds)
         class_predictions.append(yhat)
+    print(class_predictions)
     return class_predictions
 
 
