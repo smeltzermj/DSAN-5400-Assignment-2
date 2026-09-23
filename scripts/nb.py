@@ -214,9 +214,9 @@ def get_metrics(true, preds):
     :return: a tuple of various performance metrics
     """
     # TODO Compute performance measures
-    accuracy = metrics.accuracy_score(...)
-    f1_score = metrics.f1_score(...)
-    conf_matrix = metrics.confusion_matrix(...)
+    accuracy = metrics.accuracy_score(true, preds)
+    f1_score = metrics.f1_score(true, preds)
+    conf_matrix = metrics.confusion_matrix(true, preds)
 
     return accuracy, f1_score, conf_matrix
 
@@ -229,10 +229,11 @@ def plot_confusion_matrix(conf_matrix_data, labels):
     :return: None
     """
     plt.title("Confusion matrix")
-    axis = sns.heatmap(...)
-    axis.set_xticklabels(...)
-    axis.set_yticklabels(...)
+    axis = sns.heatmap(conf_matrix_data, annot=True)
+    axis.set_xticklabels(labels)
+    axis.set_yticklabels(labels)
     axis.set(xlabel="Predicted", ylabel="True")
+    plt.savefig("conf.jpg")
     plt.show()
     return
 
@@ -245,13 +246,14 @@ if __name__ == "__main__":
     training_df, test_df = build_dataframe(args.indir)
     vocabulary, priors, likelihoods = train_nb(training_df)
     class_predictions = test(test_df, vocabulary, priors, likelihoods)
-    #print(test_df["author"].tolist())
-    #print(class_predictions)
-    #acc, f1, conf = get_metrics(test_df, class_predictions)
-    #plot_confusion_matrix(conf, [0, 1])
+    acc, f1, conf = get_metrics(test_df["author"], class_predictions)
+    plot_confusion_matrix(conf, ["Kennedy", "Johnson"])
     sklearn_preds = sklearn_nb(training_df, test_df)
-    print(sklearn_preds)
-    #sklearn_metrics = get_metrics(test_df, sklearn_preds)
+    sklearn_acc, sklearn_f1, sklearn_conf = get_metrics(
+        test_df["author"], sklearn_preds)
+
+
+
 
     # EDA for Problem 1C
     #def count_words(text):
