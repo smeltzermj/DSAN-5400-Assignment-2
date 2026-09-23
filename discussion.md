@@ -48,6 +48,16 @@ Increasing the Lidstone smoothing parameter (alpha) reduced accuracy in this tes
 
 **What are the predicted authors for each of the unlabeled works?**
 
+speech_14_kennedy.txt -> Kennedy
+speech_9_kennedy.txt -> Kennedy
+speech_11_kennedy.txt -> Kennedy
+speech_5_johnson.txt -> Johnson
+speech_6_johnson.txt -> Kennedy
+speech_12_kennedy.txt -> Kennedy
+speech_8_johnson.txt -> Kennedy
+speech_10_johnson.txt -> Johnson
+speech_7_johnson.txt -> Johnson
+speech_13_kennedy.txt -> Kennedy
 
 
 # Problem 2

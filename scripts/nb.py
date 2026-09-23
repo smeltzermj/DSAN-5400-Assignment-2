@@ -20,7 +20,7 @@ def build_dataframe(folder):
     """
     path = Path(folder)
     df_train = pd.DataFrame(columns=["author", "text"])
-    df_test = pd.DataFrame(columns=["author", "text"])
+    df_test = pd.DataFrame(columns=["author", "text", "filename"])
     author_to_id_map = {"kennedy": 0, "johnson": 1}
 
     def make_df_from_dir(dir_name, df):
@@ -48,7 +48,7 @@ def build_dataframe(folder):
                     #  the field "author" should have the author's name and
                     #  the field "text" should contain the text.
                     author = f.stem.split("_")[-1] 
-                    df.loc[len(df)] = [author, text]
+                    df.loc[len(df)] = [author, text, f.name]
                     # In order to get the author name from the file, I had to take the name of the file, split it (with _ as the delimiter)
                     # And then take the last indexed value (i.e., the name). Tough!
         return df
@@ -326,9 +326,11 @@ if __name__ == "__main__":
     #    print("Start: ", words[:15])
     #    print("End: ", words[-15:])
 
-    for alpha in [0.01, 0.1, 1.0, 10.0]:
-        vocabulary, priors, likelihoods = train_nb(training_df, alpha=alpha)
-        class_predictions = test(test_df, vocabulary, priors, likelihoods)
-        acc, f1, conf = get_metrics(test_df["author"], class_predictions)
-        print(alpha, acc, class_predictions)
+    #for alpha in [0.01, 0.1, 1.0, 10.0]:
+    #    vocabulary, priors, likelihoods = train_nb(training_df, alpha=alpha)
+    #    class_predictions = test(test_df, vocabulary, priors, likelihoods)
+    #    acc, f1, conf = get_metrics(test_df["author"], class_predictions)
+    #    print(alpha, acc, class_predictions)
 
+    for filename, pred in zip(test_df["filename"], class_predictions):
+        print(filename, pred)
