@@ -236,3 +236,24 @@ if __name__ == "__main__":
 
     print(kennedy_counts["our"] / len(kennedy_words))
     print(johnson_counts["our"] / len(johnson_words))
+
+    #kennedy_first_words = kennedy_words[:15]
+    #kennedy_last_words = kennedy_words[-15:]
+    #johnson_first_words = johnson_words[:15]
+    #johnson_last_words = johnson_words[-15:]
+
+    #print(kennedy_first_words)
+    #print(kennedy_last_words)
+    #print(johnson_first_words)
+    #print(johnson_last_words)
+    # Turns out this wasn't the best method. Let's try iterating over a few speeches, instead.
+
+    for text in kennedy_texts.head(5):
+        words = text.lower().split()
+        print("Start: ", words[:15])
+        print("End: ", words[-15:])
+
+    for text in johnson_texts.head(5):
+        words = text.lower().split()
+        print("Start: ", words[:15])
+        print("End: ", words[-15:])
