@@ -332,5 +332,5 @@ if __name__ == "__main__":
     #    acc, f1, conf = get_metrics(test_df["author"], class_predictions)
     #    print(alpha, acc, class_predictions)
 
-    for filename, pred in zip(test_df["filename"], class_predictions):
-        print(filename, pred)
+    # for filename, pred in zip(test_df["filename"], class_predictions):
+        #print(filename, pred)
